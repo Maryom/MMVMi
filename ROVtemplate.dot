@@ -1,0 +1,34 @@
+digraph G {rankdir= LR ranksep = 1.2 nodesep = 0.5
+
+    graph [fontsize=10 fontname="Verdana" compound=true];
+    node [shape=record fontsize=10 fontname="Verdana"];
+
+    subgraph cluster1 {
+
+        color=lightgrey;
+        node [style=filled];
+        color=blue
+        label = "Controller";
+    }
+
+    subgraph cluster2 {
+
+        rank="same";
+        node [style=filled];
+        color=blue
+        label = "View";
+    }
+
+    subgraph cluster3 {
+
+        node [style=filled];
+        color=blue
+        label = "View Model";
+    }
+
+    subgraph cluster4 {
+
+        node [style=filled];
+        color=blue
+        label = "Model";
+    }

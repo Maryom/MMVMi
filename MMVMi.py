@@ -8,29 +8,6 @@ from termcolor import colored
 from terminaltables import SingleTable
 
 
-def check_relations(filename, extLen, noDuplicate, rovFile, objects, current_list, path):
-    "This function check relations between clusters"
-
-    noDuplicate[filename[:-extLen]] = []
-    with open(os.path.join(path, filename),'r') as f:
-        scan(rovFile, f, filename[:-extLen], objects, current_list, noDuplicate)
-
-def scan(rovFile, file, filename, objects, cluster_objects, noDuplicate):
-
-    # This pattern check inheritance relations between objects in the same cluster
-    inheritance_pattern = re.compile(filename+": \\b(?=(" + "|".join(map(re.escape, cluster_objects)) + ")\\b {)")
-
-    for num, line in enumerate(file, 1):
-        for object in objects:
-            # No warning message
-            if objects[object] == "" :
-                for match in re.finditer(object, line):
-                    draw.draw_relation(rovFile, filename, match.group(1), noDuplicate)
-            else:
-                for match in re.finditer(object, line):
-                    draw.draw_wrong_relation(rovFile, filename, match.group(1), noDuplicate, num, objects[object])
-
-
 def main():
 
     print colored('Welcome to MVC & MVVM Validation Model for iOS (MMVMi)', 'cyan')
@@ -157,22 +134,22 @@ def main():
                # check all the relations between modelView objects and other objects
                if filename[:-extLen] in modelView_list:
                    modelView_objects = { modelsPattern: "", controllersPattern: "", viewsPattern: "which is a view object. Please fix this forbidden relation. \n" }
-                   check_relations(filename, extLen, noDuplicate, rovFile, modelView_objects, modelView_list, path)
+                   draw.check_relations(filename, extLen, noDuplicate, rovFile, modelView_objects, modelView_list, path)
 
                # check all the relations between model objects and other objects
                if filename[:-extLen] in model_list:
                    model_objects = { modelViewPattern: "", controllersPattern: "which is a controller object. Please fix this forbidden relation. \n", viewsPattern: "which is a view object. Please fix this forbidden relation. \n" }
-                   check_relations(filename, extLen, noDuplicate, rovFile, model_objects, model_list, path)
+                   draw.check_relations(filename, extLen, noDuplicate, rovFile, model_objects, model_list, path)
 
                # check all the relations between controllers objects and other objects
                if filename[:-extLen] in controllers_list:
                    controller_objects = { modelsPattern: "which is a model object. Please fix this forbidden relation. \n", modelViewPattern: "", viewsPattern: "" }
-                   check_relations(filename, extLen, noDuplicate, rovFile, controller_objects, controllers_list, path)
+                   draw.check_relations(filename, extLen, noDuplicate, rovFile, controller_objects, controllers_list, path)
 
                # check all the relations between view objects and other objects
                if filename[:-extLen] in view_list:
                    view_objects = { modelsPattern: "which is a model object. Please fix this forbidden relation. \n", modelViewPattern: "", controllersPattern: "" }
-                   check_relations(filename, extLen, noDuplicate, rovFile, view_objects, view_list, path)
+                   draw.check_relations(filename, extLen, noDuplicate, rovFile, view_objects, view_list, path)
 
     rovFile.write("}")
 

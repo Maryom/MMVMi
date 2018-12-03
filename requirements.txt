@@ -1,4 +1,2 @@
-drawing
 termcolor
 terminaltables
-

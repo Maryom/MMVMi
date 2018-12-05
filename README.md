@@ -11,7 +11,13 @@ pip install -r requirements.txt
 
 ## How to run it?
 
-Open the terminal and run the following command
+First, open the terminal and clone the repository by running
+
+```sh
+git clone https://github.com/Maryom/MMVMi.git
+```
+
+Then, change the directory to the project folder and run the following command
 
 ```sh
 python MMVMi.py

@@ -9,6 +9,14 @@ Design patterns have gained popularity as they provide strategies for solving sp
 pip install -r requirements.txt
 ```
 
+## How to run it?
+
+Open the terminal and run the following command
+
+```sh
+python MMVMi.py
+```
+
 ## Author
 Maryom ([@0_1Mary](http://twitter.com/0_1Mary))
 
